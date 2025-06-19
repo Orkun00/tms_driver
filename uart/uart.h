@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include "uart_regs.h"  // Contains sci_regs_t and SCI1/SCI2 macros
+#include "sci_lin_regs.h"
 
 /**
  * @enum uart_mode
