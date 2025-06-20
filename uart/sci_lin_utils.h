@@ -19,8 +19,9 @@
  * @param reset
  *   - false (0): Put SCI/LIN module in reset.
  *   - true  (1): Take SCI/LIN module out of reset.
+ * @return true if the operation is successful, false otherwise.
  */
-void sci_lin_reset(volatile tms570_reg* sci_lin_reg, bool reset);
+bool gcr0_reset(volatile tms570_reg* sci_lin_reg, bool reset);
 
 //GCR1
 /**
@@ -40,8 +41,9 @@ void sci_lin_reset(volatile tms570_reg* sci_lin_reg, bool reset);
  * @param commMode
  *   - In compatibility mode: selects the SCI communication mode.
  *   - In LIN mode: selects the length control option for ID-field bits ID4 and ID5.
+ * @return true if the operation is successful, false otherwise.
  */
-void comm_mode(volatile tms570_reg* sci_lin_reg, bool commMode);
+bool gcr1_comm_mode(volatile tms570_reg* sci_lin_reg, bool commMode);
 
 /**
  * @brief Set the SCI timing mode (asynchronous or synchronous).
@@ -54,8 +56,9 @@ void comm_mode(volatile tms570_reg* sci_lin_reg, bool commMode);
  * @param asyncOrSync
  *   - true (1): Asynchronous timing is used.
  *   - false (0): Synchronous timing is used.
+ * @return true if the operation is successful, false otherwise.
  */
-void timing_mode(volatile tms570_reg* sci_lin_reg, bool asyncOrSync);
+bool gcr1_timing_mode(volatile tms570_reg* sci_lin_reg, bool asyncOrSync);
 
 /**
  * @brief Enable or disable the parity function for SCI/LIN.
@@ -72,8 +75,9 @@ void timing_mode(volatile tms570_reg* sci_lin_reg, bool asyncOrSync);
  * @param parityEnable
  *   - true (1): Enable parity.
  *   - false (0): Disable parity.
+ * @return true if the operation is successful, false otherwise.
  */
-void parity_enable(volatile tms570_reg* sci_lin_reg, bool parityEnable);
+bool gcr1_parity_enable(volatile tms570_reg* sci_lin_reg, bool parityEnable);
 
 /**
  * @brief Select SCI parity odd/even mode.
@@ -89,8 +93,9 @@ void parity_enable(volatile tms570_reg* sci_lin_reg, bool parityEnable);
  * @param parityOddEven
  *   - false (0): Odd parity is used.
  *   - true  (1): Even parity is used.
+ * @return true if the operation is successful, false otherwise.
  */
-void parity_odd_even(volatile tms570_reg* sci_lin_reg, bool parityOddEven);
+bool gcr1_parity_odd_even(volatile tms570_reg* sci_lin_reg, bool parityOddEven);
 
 /**
  * @brief Set the number of stop bits per frame in SCI mode.
@@ -106,8 +111,9 @@ void parity_odd_even(volatile tms570_reg* sci_lin_reg, bool parityOddEven);
  * @param stopBits
  *   - false (0): One stop bit is used.
  *   - true  (1): Two stop bits are used.
+ * @return true if the operation is successful, false otherwise.
  */
-void sci_number_of_stop_bits_per_frame(volatile tms570_reg* sci_lin_reg, bool stopBits);
+bool gcr1_sci_number_of_stop_bits_per_frame(volatile tms570_reg* sci_lin_reg, bool stopBits);
 
 /**
  * @brief Set the SCI/LIN clock mode (internal/external or master/slave).
@@ -130,8 +136,9 @@ void sci_number_of_stop_bits_per_frame(volatile tms570_reg* sci_lin_reg, bool st
  * @param clockMode
  *   - false (0): External clock (SCI) or slave mode (LIN).
  *   - true  (1): Internal clock (SCI) or master mode (LIN).
+ * @return true if the operation is successful, false otherwise.
  */
-void clock_mode(volatile tms570_reg* sci_lin_reg, bool clockMode);
+bool gcr1_clock_mode(volatile tms570_reg* sci_lin_reg, bool clockMode);
 
 /**
  * @brief Set the LIN mode of the SCI/LIN module.
@@ -144,8 +151,9 @@ void clock_mode(volatile tms570_reg* sci_lin_reg, bool clockMode);
  * @param linMode
  *   - false (0): LIN mode is disabled (SCI mode enabled).
  *   - true  (1): LIN mode is enabled (SCI mode disabled).
+ * @return true if the operation is successful, false otherwise.
  */
-void lin_mode(volatile tms570_reg* sci_lin_reg, bool linMode);
+bool gcr1_lin_mode(volatile tms570_reg* sci_lin_reg, bool linMode);
 
 /**
  * @brief Set the Software Reset (SWnRST) state for the SCI/LIN module.
@@ -164,7 +172,7 @@ void lin_mode(volatile tms570_reg* sci_lin_reg, bool linMode);
  *   - false (0): Put SCI/LIN in reset state.
  *   - true  (1): Put SCI/LIN in ready state.
  */
-void SWnRST(volatile tms570_reg* sci_lin_reg, bool SWnRST);
+bool gcr1_SWnRST(volatile tms570_reg* sci_lin_reg, bool SWnRST);
 
 /**
  * @brief Set the SCI Sleep mode.
@@ -183,7 +191,7 @@ void SWnRST(volatile tms570_reg* sci_lin_reg, bool SWnRST);
  *   - false (0): Disable sleep mode (SCI/LIN is active).
  *   - true  (1): Enable sleep mode.
  */
-void sci_sleep(volatile tms570_reg* sci_lin_reg, bool enableOrDisable);
+bool gcr1_sleep(volatile tms570_reg* sci_lin_reg, bool enableOrDisable);
 
 /**
  * @brief Enable or disable automatic baud rate adjustment (ADAPT bit) for LIN mode.
@@ -201,7 +209,7 @@ void sci_sleep(volatile tms570_reg* sci_lin_reg, bool enableOrDisable);
  *   - false (0): Automatic baud rate adjustment is disabled (fixed bit rate).
  *   - true  (1): Automatic baud rate adjustment is enabled.
  */
-void automatic_baud_rate_adjustment(volatile tms570_reg* sci_lin_reg, bool automaticBaudRateAdjustment);
+bool gcr1_adapt(volatile tms570_reg* sci_lin_reg, bool automaticBaudRateAdjustment);
 
 /**
  * @brief Enable or disable Multi-buffer mode for SCI/LIN.
@@ -218,7 +226,7 @@ void automatic_baud_rate_adjustment(volatile tms570_reg* sci_lin_reg, bool autom
  *   - false (0): Multi-buffer mode is disabled (single register RD0/TD0 used).
  *   - true  (1): Multi-buffer mode is enabled (multi-buffers used).
  */
-void multi_buffer_mode(volatile tms570_reg* sci_lin_reg, bool multiBufferMode);
+bool gcr1_mbuf(volatile tms570_reg* sci_lin_reg, bool multiBufferMode);
 /**
  * @brief Set the checksum type for LIN mode (classic or enhanced).
  *
@@ -231,7 +239,7 @@ void multi_buffer_mode(volatile tms570_reg* sci_lin_reg, bool multiBufferMode);
  *   - false (0): Use classic checksum.
  *   - true  (1): Use enhanced checksum.
  */
-void checksum_enhanced(volatile tms570_reg* sci_lin_reg, bool checksumType);
+bool gcr1_ctype(volatile tms570_reg* sci_lin_reg, bool checksumType);
 
 /**
  * @brief Set the HGEN control bit for LIN ID filtering mode.
@@ -250,7 +258,7 @@ void checksum_enhanced(volatile tms570_reg* sci_lin_reg, bool checksumType);
  *   - false (0): Use ID-BYTE field in LINID for filtering.
  *   - true  (1): Use ID-SlaveTask BYTE for filtering (recommended).
  */
-void hgen_control(volatile tms570_reg* sci_lin_reg, bool hgenControl);
+bool gcr1_hgen_ctrl(volatile tms570_reg* sci_lin_reg, bool hgenControl);
 /**
  * @brief Stop extended frame communication in LIN mode.
  *
@@ -263,7 +271,7 @@ void hgen_control(volatile tms570_reg* sci_lin_reg, bool hgenControl);
  *   - true (1): Stop extended frame communication after current frame.
  *   - false (0): No effect.
  */
-void stop_extended_frame_communication(volatile tms570_reg* sci_lin_reg, bool stopExtFrame);
+bool gcr1_stop_ext_frame(volatile tms570_reg* sci_lin_reg, bool stopExtFrame);
 
 /**
  * @brief Enable or disable loopback mode for SCI/LIN.
@@ -282,7 +290,7 @@ void stop_extended_frame_communication(volatile tms570_reg* sci_lin_reg, bool st
  *   - false (0): Loopback mode is disabled.
  *   - true  (1): Loopback mode is enabled.
  */
-void loopback_mode(volatile tms570_reg* sci_lin_reg, bool loopbackMode);
+bool gcr1_loopback_mode(volatile tms570_reg* sci_lin_reg, bool loopbackMode);
 /**
  * @brief Configure the "Continue on Suspend" feature for SCI/LIN.
  *
@@ -299,7 +307,7 @@ void loopback_mode(volatile tms570_reg* sci_lin_reg, bool loopbackMode);
  *   - false (0): Freeze SCI/LIN state machine and counters during debug suspend.
  *   - true  (1): Allow SCI/LIN to continue until current transmit/receive complete during debug suspend.
  */
-void continiue_on_suspend(volatile tms570_reg* sci_lin_reg, bool continueOnSuspend);
+bool gcr1_continue_on_suspend(volatile tms570_reg* sci_lin_reg, bool continueOnSuspend);
 /**
  * @brief Enable or disable the receiver for SCI/LIN.
  *
@@ -328,7 +336,7 @@ void continiue_on_suspend(volatile tms570_reg* sci_lin_reg, bool continueOnSuspe
  *   - false (0): Disable receiver (no transfer to receive buffer or multi-buffers).
  *   - true  (1): Enable receiver (allow transfer to receive buffer or multi-buffers).
  */
-void rx_enable(volatile tms570_reg* sci_lin_reg, bool rxEnable);
+bool gcr1_rx_ena(volatile tms570_reg* sci_lin_reg, bool rxEnable);
 /**
  * @brief Enable or disable the transmitter for SCI/LIN.
  *
@@ -348,7 +356,7 @@ void rx_enable(volatile tms570_reg* sci_lin_reg, bool rxEnable);
  *   - false (0): Disable transmitter (no transfer to SCITXSHF).
  *   - true  (1): Enable transmitter (allow transfer to SCITXSHF).
  */
-void tx_enable(volatile tms570_reg* sci_lin_reg, bool txEnable);
+bool gcr1_tx_ena(volatile tms570_reg* sci_lin_reg, bool txEnable);
 
 //GCR2
 /**
@@ -369,7 +377,8 @@ void tx_enable(volatile tms570_reg* sci_lin_reg, bool txEnable);
  *   - false (0): Normal operation.
  *   - true  (1): Enter local low-power mode.
  */
-void power_down(volatile tms570_reg* sci_lin_reg, bool powerDown);
+bool gcr2_power_down(volatile tms570_reg* sci_lin_reg, bool powerDown);
+
 /**
  * @brief Generate wakeup signal in LIN mode.
  *
@@ -385,7 +394,7 @@ void power_down(volatile tms570_reg* sci_lin_reg, bool powerDown);
  *   - false (0): No wakeup signal will be generated.
  *   - true  (1): Generate a wakeup signal by transmitting the TDO buffer value.
  */
-void generate_wakeup_signal(volatile tms570_reg* sci_lin_reg, bool generate);
+bool gcr2_gen_wu(volatile tms570_reg* sci_lin_reg, bool generate);
 /**
  * @brief Send checksum byte in LIN mode.
  *
@@ -406,7 +415,7 @@ void generate_wakeup_signal(volatile tms570_reg* sci_lin_reg, bool generate);
  *   - false (0): No checksum byte will be sent.
  *   - true  (1): A checksum byte will be sent.
  */
-void send_checksum_byte(volatile tms570_reg* sci_lin_reg, bool sendChecksumByte);
+bool gcr2_sc(volatile tms570_reg* sci_lin_reg, bool sendChecksumByte);
 
 /**
  * @brief Trigger checksum compare in LIN mode (receiver, extended frames).
@@ -429,7 +438,7 @@ void send_checksum_byte(volatile tms570_reg* sci_lin_reg, bool sendChecksumByte)
  *   - false (0): No checksum compare will occur.
  *   - true  (1): Compare checksum on expected checksum byte.
  */
-void compare_checksum(volatile tms570_reg* sci_lin_reg, bool compareChecksum);
+bool gcr2_cc(volatile tms570_reg* sci_lin_reg, bool compareChecksum);
 
 //SCI_LIN_SET_INT
 /**
@@ -446,7 +455,7 @@ void compare_checksum(volatile tms570_reg* sci_lin_reg, bool compareChecksum);
  *   - false (0): Disable break-detect interrupt.
  *   - true  (1): Enable break-detect interrupt.
  */
-void set_brkdt_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_brkdt(volatile tms570_reg* sci_lin_reg, bool enable);
 /**
  * @brief Set wake-up interrupt enable.
  *
@@ -463,7 +472,7 @@ void set_brkdt_int(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - false (0): Disable wake-up interrupt.
  *   - true  (1): Enable wake-up interrupt.
  */
-void set_wakeup_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_wakeup(volatile tms570_reg* sci_lin_reg, bool enable);
 /**
  * @brief Set timeout interrupt enable.
  *
@@ -478,7 +487,7 @@ void set_wakeup_int(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - false (0): Disable timeout interrupt.
  *   - true  (1): Enable timeout interrupt.
  */
-void set_timeout_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_timeout(volatile tms570_reg* sci_lin_reg, bool enable);
 
 /**
  * @brief Set timeout after wakeup signal interrupt enable.
@@ -494,7 +503,7 @@ void set_timeout_int(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - false (0): Disable timeout after wakeup signal interrupt.
  *   - true  (1): Enable timeout after wakeup signal interrupt.
  */
-void set_timeout_after_wakeup_signal_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_toawus(volatile tms570_reg* sci_lin_reg, bool enable);
 /**
  * @brief Set timeout after three wakeup signals interrupt enable.
  *
@@ -509,7 +518,7 @@ void set_timeout_after_wakeup_signal_int(volatile tms570_reg* sci_lin_reg, bool 
  *   - false (0): Disable timeout after three wakeup signals interrupt.
  *   - true  (1): Enable timeout after three wakeup signals interrupt.
  */
-void set_timeout_after_3_wakeup_signal_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_toa3wus(volatile tms570_reg* sci_lin_reg, bool enable);
 
 /**
  * @brief Set transmitter interrupt enable.
@@ -526,7 +535,7 @@ void set_timeout_after_3_wakeup_signal_int(volatile tms570_reg* sci_lin_reg, boo
  *   - false (0): Disable transmitter interrupt.
  *   - true  (1): Enable transmitter interrupt.
  */
-void set_transmitter_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_tx(volatile tms570_reg* sci_lin_reg, bool enable);
 /**
  * @brief Receiver interrupt enable.
  *
@@ -542,7 +551,7 @@ void set_transmitter_int(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - false (0): Disable receiver interrupt.
  *   - true  (1): Enable receiver interrupt.
  */
-void set_receiver_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_rx(volatile tms570_reg* sci_lin_reg, bool enable);
 /**
  * @brief Set identification interrupt enable.
  *
@@ -558,7 +567,7 @@ void set_receiver_int(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - false (0): Disable identification interrupt.
  *   - true  (1): Enable identification interrupt.
  */
-void set_identification_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_id(volatile tms570_reg* sci_lin_reg, bool enable);
 
 /**
  * @brief Set transmit DMA request enable.
@@ -575,7 +584,7 @@ void set_identification_int(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - false (0): Transmit DMA request is disabled.
  *   - true  (1): Transmit DMA request is enabled.
  */
-void set_transmit_dma(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_tx_dma(volatile tms570_reg* sci_lin_reg, bool enable);
 /**
  * @brief Set receive DMA request enable.
  *
@@ -591,7 +600,7 @@ void set_transmit_dma(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - false (0): Receive DMA request is disabled.
  *   - true  (1): Receive DMA request is enabled for address and data frames.
  */
-void set_receive_dma(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_rx_dma(volatile tms570_reg* sci_lin_reg, bool enable);
 
 /**
  * @brief Set receive DMA request for all frames (address and data) in SCI-compatible mode.
@@ -614,7 +623,7 @@ void set_receive_dma(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - false (0): DMA request is disabled for address frames (interrupt enabled for address frames).
  *   - true  (1): DMA request is enabled for both address and data frames.
  */
-void set_receive_dma_all(volatile tms570_reg* sci_lin_reg, bool receiveDmaAll);
+bool sci_set_int_rx_dma_all(volatile tms570_reg* sci_lin_reg, bool receiveDmaAll);
 
 /**
  * @brief Set parity error interrupt enable.
@@ -630,7 +639,7 @@ void set_receive_dma_all(volatile tms570_reg* sci_lin_reg, bool receiveDmaAll);
  *   - false (0): Parity error interrupt is disabled.
  *   - true  (1): Parity error interrupt is enabled.
  */
-void set_parity_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_parity(volatile tms570_reg* sci_lin_reg, bool enable);
 /**
  * @brief Set overrun-error interrupt enable.
  *
@@ -645,7 +654,7 @@ void set_parity_int(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - false (0): Overrun error interrupt is disabled.
  *   - true  (1): Overrun error interrupt is enabled.
  */
-void set_overrun_error_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_overrun(volatile tms570_reg* sci_lin_reg, bool enable);
 /**
  * @brief Set framing-error interrupt enable.
  *
@@ -660,7 +669,7 @@ void set_overrun_error_int(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - false (0): Framing error interrupt is disabled.
  *   - true  (1): Framing error interrupt is enabled.
  */
-void set_framing_error_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_framing(volatile tms570_reg* sci_lin_reg, bool enable);
 /**
  * @brief Set no-response-error interrupt enable.
  *
@@ -675,7 +684,7 @@ void set_framing_error_int(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - false (0): No-response-error interrupt is disabled.
  *   - true  (1): No-response-error interrupt is enabled.
  */
-void set_no_response_error_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_no_response(volatile tms570_reg* sci_lin_reg, bool enable);
 /**
  * @brief Set inconsistent-synch-field-error interrupt enable.
  *
@@ -690,7 +699,7 @@ void set_no_response_error_int(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - false (0): Inconsistent-synch-field-error interrupt is disabled.
  *   - true  (1): Inconsistent-synch-field-error interrupt is enabled.
  */
-void set_inconsistent_synch_field_error_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_inconsistent_synch_field(volatile tms570_reg* sci_lin_reg, bool enable);
 /**
  * @brief Set checksum-error interrupt enable.
  *
@@ -705,7 +714,7 @@ void set_inconsistent_synch_field_error_int(volatile tms570_reg* sci_lin_reg, bo
  *   - false (0): Checksum-error interrupt is disabled.
  *   - true  (1): Checksum-error interrupt is enabled.
  */
-void set_checksum_error_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_checksum(volatile tms570_reg* sci_lin_reg, bool enable);
 /**
  * @brief Set physical bus error interrupt enable.
  *
@@ -720,7 +729,7 @@ void set_checksum_error_int(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - false (0): Physical bus error interrupt is disabled.
  *   - true  (1): Physical bus error interrupt is enabled.
  */
-void set_physical_bus_error_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_physical_bus_error(volatile tms570_reg* sci_lin_reg, bool enable);
 /**
  * @brief Set bit error interrupt enable.
  *
@@ -735,7 +744,7 @@ void set_physical_bus_error_int(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - false (0): Bit error interrupt is disabled.
  *   - true  (1): Bit error interrupt is enabled.
  */
-void set_bit_error_int(volatile tms570_reg* sci_lin_reg, bool enable);
+bool sci_set_int_bit_error(volatile tms570_reg* sci_lin_reg, bool enable);
 
 //SCI_LIN_CLR_INT
 /**
@@ -752,7 +761,7 @@ void set_bit_error_int(volatile tms570_reg* sci_lin_reg, bool enable);
  *   - true (1): Disable the break-detect interrupt.
  *   - false (0): No effect.
  */
-void clear_break_detect_int(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_brkdt(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear wake-up interrupt.
  *
@@ -767,7 +776,7 @@ void clear_break_detect_int(volatile tms570_reg* sci_lin_reg, bool clear);
  *   - true (1): Disable the wake-up interrupt.
  *   - false (0): No effect.
  */
-void clear_wakeup_int(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_wakeup(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear timeout interrupt.
  *
@@ -781,7 +790,7 @@ void clear_wakeup_int(volatile tms570_reg* sci_lin_reg, bool clear);
  *   - true (1): Disable the timeout interrupt.
  *   - false (0): No effect.
  */
-void clear_timeout_int(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_timeout(volatile tms570_reg* sci_lin_reg, bool clear);
 
 /**
  * @brief Clear timeout-after-wakeup-signal interrupt.
@@ -797,7 +806,7 @@ void clear_timeout_int(volatile tms570_reg* sci_lin_reg, bool clear);
  *   - true (1): Disable the timeout-after-wakeup-signal interrupt.
  *   - false (0): No effect.
  */
-void clear_timeout_after_wakeup_int(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_toawus(volatile tms570_reg* sci_lin_reg, bool clear);
 
 /**
  * @brief Clear timeout-after-three-wakeup-signals interrupt.
@@ -813,7 +822,7 @@ void clear_timeout_after_wakeup_int(volatile tms570_reg* sci_lin_reg, bool clear
  *   - true (1): Disable the timeout-after-three-wakeup-signals interrupt.
  *   - false (0): No effect.
  */
-void clear_timeout_after_three_wakeup_int(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_toa3wus(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear transmitter interrupt.
  *
@@ -827,7 +836,7 @@ void clear_timeout_after_three_wakeup_int(volatile tms570_reg* sci_lin_reg, bool
  *   - true (1): Disable the transmitter interrupt.
  *   - false (0): No effect.
  */
-void clear_tx_int(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_tx(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear receiver interrupt.
  *
@@ -841,7 +850,7 @@ void clear_tx_int(volatile tms570_reg* sci_lin_reg, bool clear);
  *   - true (1): Disable the receiver interrupt.
  *   - false (0): No effect.
  */
-void clear_rx_int(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_rx(volatile tms570_reg* sci_lin_reg, bool clear);
 
 //SCI_LIN_SET_INT_LVL
 /**
@@ -857,7 +866,7 @@ void clear_rx_int(volatile tms570_reg* sci_lin_reg, bool clear);
  *   - false (0): Map break-detect interrupt to INT0 line.
  *   - true  (1): Map break-detect interrupt to INT1 line.
  */
-void set_brkdt_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_brkdt_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set wake-up interrupt level.
  *
@@ -871,7 +880,7 @@ void set_brkdt_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
  *   - false (0): Map wake-up interrupt to INT0 line.
  *   - true  (1): Map wake-up interrupt to INT1 line.
  */
-void set_wakeup_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_wakeup_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set timeout interrupt level.
  *
@@ -885,7 +894,7 @@ void set_wakeup_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
  *   - false (0): Map timeout interrupt to INT0 line.
  *   - true  (1): Map timeout interrupt to INT1 line.
  */
-void set_timeout_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_timeout_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set timeout-after-wakeup-signal interrupt level.
  *
@@ -899,7 +908,7 @@ void set_timeout_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
  *   - false (0): Map timeout-after-wakeup-signal interrupt to INT0 line.
  *   - true  (1): Map timeout-after-wakeup-signal interrupt to INT1 line.
  */
-void set_timeout_after_wakeup_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_toawus_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set timeout-after-three-wakeup-signals interrupt level.
  *
@@ -913,7 +922,7 @@ void set_timeout_after_wakeup_int_level(volatile tms570_reg* sci_lin_reg, bool i
  *   - false (0): Map timeout-after-three-wakeup-signals interrupt to INT0 line.
  *   - true  (1): Map timeout-after-three-wakeup-signals interrupt to INT1 line.
  */
-void set_timeout_after_three_wakeup_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_toa3wus_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set transmitter interrupt level.
  *
@@ -927,7 +936,7 @@ void set_timeout_after_three_wakeup_int_level(volatile tms570_reg* sci_lin_reg, 
  *   - false (0): Map transmitter interrupt to INT0 line.
  *   - true  (1): Map transmitter interrupt to INT1 line.
  */
-void set_transmitter_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_tx_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set receiver interrupt level.
  *
@@ -941,7 +950,7 @@ void set_transmitter_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
  *   - false (0): Map receiver interrupt to INT0 line.
  *   - true  (1): Map receiver interrupt to INT1 line.
  */
-void set_receiver_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_rx_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set ID interrupt level.
  *
@@ -955,7 +964,7 @@ void set_receiver_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
  *   - false (0): Map ID interrupt to INT0 line.
  *   - true  (1): Map ID interrupt to INT1 line.
  */
-void set_id_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_id_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set receive DMA all interrupt level.
  *
@@ -969,7 +978,7 @@ void set_id_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
  *   - false (0): Map receive DMA all interrupt to INT0 line.
  *   - true  (1): Map receive DMA all interrupt to INT1 line.
  */
-void set_receive_dma_all_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_rx_dma_all_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set parity error interrupt level.
  *
@@ -983,7 +992,7 @@ void set_receive_dma_all_int_level(volatile tms570_reg* sci_lin_reg, bool intLev
  *   - false (0): Map parity error interrupt to INT0 line.
  *   - true  (1): Map parity error interrupt to INT1 line.
  */
-void set_parity_error_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_parity_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set overrun-error interrupt level.
  *
@@ -997,7 +1006,7 @@ void set_parity_error_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel)
  *   - false (0): Map overrun-error interrupt to INT0 line.
  *   - true  (1): Map overrun-error interrupt to INT1 line.
  */
-void set_overrun_error_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_overrun_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set framing-error interrupt level.
  *
@@ -1011,7 +1020,7 @@ void set_overrun_error_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel
  *   - false (0): Map framing-error interrupt to INT0 line.
  *   - true  (1): Map framing-error interrupt to INT1 line.
  */
-void set_framing_error_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_framing_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set no-response-error interrupt level.
  *
@@ -1025,7 +1034,7 @@ void set_framing_error_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel
  *   - false (0): Map no-response-error interrupt to INT0 line.
  *   - true  (1): Map no-response-error interrupt to INT1 line.
  */
-void set_no_response_error_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_no_response_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set inconsistent-synch-field-error interrupt level.
  *
@@ -1039,7 +1048,7 @@ void set_no_response_error_int_level(volatile tms570_reg* sci_lin_reg, bool intL
  *   - false (0): Map inconsistent-synch-field-error interrupt to INT0 line.
  *   - true  (1): Map inconsistent-synch-field-error interrupt to INT1 line.
  */
-void set_inconsistent_synch_field_error_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_inconsistent_synch_field_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set checksum-error interrupt level.
  *
@@ -1053,7 +1062,7 @@ void set_inconsistent_synch_field_error_int_level(volatile tms570_reg* sci_lin_r
  *   - false (0): Map checksum-error interrupt to INT0 line.
  *   - true  (1): Map checksum-error interrupt to INT1 line.
  */
-void set_checksum_error_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_checksum_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 
 /**
  * @brief Set physical bus error interrupt level.
@@ -1068,7 +1077,7 @@ void set_checksum_error_int_level(volatile tms570_reg* sci_lin_reg, bool intLeve
  *   - false (0): Map physical bus error interrupt to INT0 line.
  *   - true  (1): Map physical bus error interrupt to INT1 line.
  */
-void set_physical_bus_error_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_physical_bus_error_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 /**
  * @brief Set bit error interrupt level.
  *
@@ -1082,7 +1091,7 @@ void set_physical_bus_error_int_level(volatile tms570_reg* sci_lin_reg, bool int
  *   - false (0): Map bit error interrupt to INT0 line.
  *   - true  (1): Map bit error interrupt to INT1 line.
  */
-void set_bit_error_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
+bool sci_set_int_bit_error_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
 
 //SCI_LIN_CLEAR_INT_LVL
 
@@ -1099,7 +1108,7 @@ void set_bit_error_int_level(volatile tms570_reg* sci_lin_reg, bool intLevel);
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_break_detect_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_brkdt_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear wake-up interrupt level.
  *
@@ -1113,7 +1122,7 @@ void clear_break_detect_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_wakeup_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_wakeup_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear timeout interrupt level.
  *
@@ -1127,7 +1136,7 @@ void clear_wakeup_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_timeout_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_timeout_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear timeout-after-wakeup-signal interrupt level.
  *
@@ -1141,7 +1150,7 @@ void clear_timeout_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_timeout_after_wakeup_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_toawus_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear timeout-after-three-wakeup-signals interrupt level.
  *
@@ -1155,7 +1164,7 @@ void clear_timeout_after_wakeup_int_level(volatile tms570_reg* sci_lin_reg, bool
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_timeout_after_three_wakeup_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_toa3wus_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear transmitter interrupt level.
  *
@@ -1169,7 +1178,7 @@ void clear_timeout_after_three_wakeup_int_level(volatile tms570_reg* sci_lin_reg
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_transmitter_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_tx_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear receiver interrupt level.
  *
@@ -1183,7 +1192,7 @@ void clear_transmitter_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_receiver_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_rx_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear ID interrupt level.
  *
@@ -1197,7 +1206,7 @@ void clear_receiver_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_id_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_id_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear receive DMA interrupt level.
  *
@@ -1211,7 +1220,7 @@ void clear_id_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
  *   - true (1): Map the receive interrupt request for address frames to INT0 line.
  *   - false (0): No effect.
  */
-void clear_receive_dma_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_rx_dma_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear parity interrupt level.
  *
@@ -1225,7 +1234,7 @@ void clear_receive_dma_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_parity_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_parity_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear overrun-error interrupt level.
  *
@@ -1239,7 +1248,7 @@ void clear_parity_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_overrun_error_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_overrun_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear framing-error interrupt level.
  *
@@ -1253,7 +1262,7 @@ void clear_overrun_error_int_level(volatile tms570_reg* sci_lin_reg, bool clear)
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_framing_error_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_framing_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear no-response-error interrupt level.
  *
@@ -1267,7 +1276,7 @@ void clear_framing_error_int_level(volatile tms570_reg* sci_lin_reg, bool clear)
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_no_response_error_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_no_response_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear inconsistent-synch-field-error (ISFE) interrupt level.
  *
@@ -1281,7 +1290,7 @@ void clear_no_response_error_int_level(volatile tms570_reg* sci_lin_reg, bool cl
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_inconsistent_synch_field_error_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_inconsistent_synch_field_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear checksum-error interrupt level.
  *
@@ -1295,7 +1304,7 @@ void clear_inconsistent_synch_field_error_int_level(volatile tms570_reg* sci_lin
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_checksum_error_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_checksum_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear physical bus error interrupt level.
  *
@@ -1309,7 +1318,7 @@ void clear_checksum_error_int_level(volatile tms570_reg* sci_lin_reg, bool clear
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_physical_bus_error_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_physical_bus_error_level(volatile tms570_reg* sci_lin_reg, bool clear);
 /**
  * @brief Clear bit error interrupt level.
  *
@@ -1323,7 +1332,7 @@ void clear_physical_bus_error_int_level(volatile tms570_reg* sci_lin_reg, bool c
  *   - true (1): Map the interrupt level to INT0 line.
  *   - false (0): No effect.
  */
-void clear_bit_error_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
+bool sci_clr_int_bit_error_level(volatile tms570_reg* sci_lin_reg, bool clear);
 
 //SCI_LIN_FLR
 /**
@@ -1350,7 +1359,7 @@ void clear_bit_error_int_level(volatile tms570_reg* sci_lin_reg, bool clear);
  *   - true (1): A break condition has been detected since the last clear.
  *   - false (0): No break condition has been detected since the last clear.
  */
-bool get_break_detect_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_brkdt_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the SCI break-detect flag.
@@ -1359,7 +1368,7 @@ bool get_break_detect_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void set_break_detect_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_brkdt_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Get the wakeup flag status.
@@ -1386,7 +1395,7 @@ void set_break_detect_flag(volatile tms570_reg* sci_lin_reg);
  *   - true (1): Wake up from power-down mode has occurred.
  *   - false (0): No wake up from power-down mode.
  */
-bool get_wakeup_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_wakeup_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the wakeup flag.
@@ -1395,7 +1404,7 @@ bool get_wakeup_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void clear_wakeup_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_wakeup_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Get the SCI receiver idle flag status.
@@ -1420,7 +1429,7 @@ void clear_wakeup_flag(volatile tms570_reg* sci_lin_reg);
  *   - true (1): Idle period detected, SCI ready to receive.
  *   - false (0): Idle period not detected, SCI will not receive data.
  */
-bool get_receiver_idle_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_receiver_idle_flag(volatile tms570_reg* sci_lin_reg);
 /**
  * @brief Get the SCI/LIN bus busy flag status.
  *
@@ -1444,7 +1453,7 @@ bool get_receiver_idle_flag(volatile tms570_reg* sci_lin_reg);
  *   - true (1): The receiver is currently receiving a frame (BUSY).
  *   - false (0): The receiver is not currently receiving a frame.
  */
-bool get_bus_busy_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_bus_busy_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Get the LIN bus idle timeout flag status.
@@ -1464,7 +1473,7 @@ bool get_bus_busy_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if a LIN bus idle has been detected, false otherwise.
  */
-bool get_lin_bus_idle_timeout_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_lin_bus_idle_timeout_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the LIN bus idle timeout flag.
@@ -1473,7 +1482,7 @@ bool get_lin_bus_idle_timeout_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void set_lin_bus_idle_timeout_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_lin_bus_idle_timeout_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Get the timeout after wakeup signal flag status.
@@ -1493,7 +1502,7 @@ void set_lin_bus_idle_timeout_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if a timeout occurred after a wakeup signal, false otherwise.
  */
-bool get_timeout_after_wakeup_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_toawus_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the timeout after wakeup signal flag.
@@ -1502,7 +1511,7 @@ bool get_timeout_after_wakeup_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void set_timeout_after_wakeup_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_toawus_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Get the timeout after three wakeup signals flag status.
@@ -1525,7 +1534,7 @@ void set_timeout_after_wakeup_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if a timeout occurred after three wakeup signals, false otherwise.
  */
-bool get_timeout_after_three_wakeup_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_toa3wus_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the timeout after three wakeup signals flag.
@@ -1534,7 +1543,7 @@ bool get_timeout_after_three_wakeup_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void set_timeout_after_three_wakeup_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_toa3wus_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Check if the transmitter buffer register is ready (TXRDY flag).
@@ -1558,7 +1567,7 @@ void set_timeout_after_three_wakeup_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if the transmit buffer is ready to accept a new character, false otherwise.
  */
-bool get_transmitter_ready_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_txrdy_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the receiver ready flag (RXRDY).
@@ -1574,7 +1583,7 @@ bool get_transmitter_ready_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void clear_receiver_ready_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_rxrdy_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Check if the receiver ready flag (RXRDY) is set.
@@ -1590,7 +1599,7 @@ void clear_receiver_ready_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if new data is ready to be read, false otherwise.
  */
-bool get_receiver_ready_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_rxrdy_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Set the transmitter wakeup method (TX WAKE) for SCI mode.
@@ -1608,7 +1617,7 @@ bool get_receiver_ready_flag(volatile tms570_reg* sci_lin_reg);
  *   - false (0): Data frame.
  *   - true  (1): Address frame.
  */
-void set_tx_wake(volatile tms570_reg* sci_lin_reg, bool txWake);
+bool sci_set_tx_wake(volatile tms570_reg* sci_lin_reg, bool txWake);
 
 /**
  * @brief Check if the transmitter empty flag (TX EMPTY) is set.
@@ -1624,7 +1633,7 @@ void set_tx_wake(volatile tms570_reg* sci_lin_reg, bool txWake);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if transmitter is empty, false otherwise.
  */
-bool get_transmitter_empty_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_txempty_flag(volatile tms570_reg* sci_lin_reg);
 /**
  * @brief Check if the receiver wakeup detect flag (RX WAKE) is set.
  *
@@ -1637,7 +1646,7 @@ bool get_transmitter_empty_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if the data in SCIRD is an address, false otherwise.
  */
-bool get_receiver_wakeup_detect_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_rxwake_flag(volatile tms570_reg* sci_lin_reg);
 
 
 /**
@@ -1656,7 +1665,7 @@ bool get_receiver_wakeup_detect_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if a valid ID TX has been received since the last clear, false otherwise.
  */
-bool get_id_transmit_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_idtx_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the Identifier on Transmit (ID TX) flag.
@@ -1665,7 +1674,7 @@ bool get_id_transmit_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void set_id_transmit_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_idtx_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Check if the Identifier on Receive (ID RX) flag is set.
@@ -1686,7 +1695,7 @@ void set_id_transmit_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if a valid ID RX has been received since the last clear, false otherwise.
  */
-bool get_id_receive_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_idrx_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the Identifier on Receive (ID RX) flag.
@@ -1695,7 +1704,7 @@ bool get_id_receive_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void set_id_receive_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_idrx_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Check if the Parity Error (PE) flag is set.
@@ -1720,7 +1729,7 @@ void set_id_receive_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if a parity error has been detected since the last clear, false otherwise.
  */
-bool get_parity_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_pe_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the Parity Error (PE) flag.
@@ -1729,7 +1738,7 @@ bool get_parity_error_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void set_parity_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_pe_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Check if the Overrun Error (OE) flag is set.
@@ -1751,7 +1760,7 @@ void set_parity_error_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if an overrun error has been detected since the last clear, false otherwise.
  */
-bool get_overrun_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_oe_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the Overrun Error (OE) flag.
@@ -1760,7 +1769,7 @@ bool get_overrun_error_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void set_overrun_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_oe_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Check if the Framing Error (FE) flag is set.
@@ -1786,7 +1795,7 @@ void set_overrun_error_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if a framing error has been detected since the last clear, false otherwise.
  */
-bool get_framing_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_fe_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the Framing Error (FE) flag.
@@ -1795,7 +1804,7 @@ bool get_framing_error_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void set_framing_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_fe_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Check if the No-Response Error (NRE) flag is set.
@@ -1819,7 +1828,7 @@ void set_framing_error_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if a no-response error has been detected since the last clear, false otherwise.
  */
-bool get_no_response_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_nre_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the No-Response Error (NRE) flag.
@@ -1828,7 +1837,7 @@ bool get_no_response_error_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void set_no_response_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_nre_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Check if the Inconsistent Synch Field Error (ISFE) flag is set.
@@ -1851,7 +1860,7 @@ void set_no_response_error_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if an inconsistent synch field error has been detected since the last clear, false otherwise.
  */
-bool get_inconsistent_synch_field_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_isfe_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the Inconsistent Synch Field Error (ISFE) flag.
@@ -1860,7 +1869,7 @@ bool get_inconsistent_synch_field_error_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void set_inconsistent_synch_field_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_isfe_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Check if the Checksum Error flag is set.
@@ -1883,7 +1892,7 @@ void set_inconsistent_synch_field_error_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if a checksum error has been detected since the last clear, false otherwise.
  */
-bool get_checksum_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_ce_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the Checksum Error flag.
@@ -1892,7 +1901,7 @@ bool get_checksum_error_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void set_checksum_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_ce_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Check if the Physical Bus Error (PBE) flag is set.
@@ -1917,7 +1926,7 @@ void set_checksum_error_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if a physical bus error has been detected since the last clear, false otherwise.
  */
-bool get_physical_bus_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_pbe_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the Physical Bus Error (PBE) flag.
@@ -1926,7 +1935,7 @@ bool get_physical_bus_error_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void set_physical_bus_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_pbe_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Check if the Bit Error flag is set.
@@ -1948,7 +1957,7 @@ void set_physical_bus_error_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return true if a bit error has been detected since the last clear, false otherwise.
  */
-bool get_bit_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_get_be_flag(volatile tms570_reg* sci_lin_reg);
 
 /**
  * @brief Clear the Bit Error flag.
@@ -1957,7 +1966,7 @@ bool get_bit_error_flag(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void set_bit_error_flag(volatile tms570_reg* sci_lin_reg);
+bool sci_clr_be_flag(volatile tms570_reg* sci_lin_reg);
 
 //SCI_LIN_INT_VECT_0
 /**
@@ -1973,7 +1982,7 @@ void set_bit_error_flag(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return The 5-bit interrupt vector offset (0x00 - 0x1F).
  */
-uint8_t get_int_vect_0(volatile tms570_reg* sci_lin_reg);
+bool sci_get_int_vect_0(volatile tms570_reg* sci_lin_reg, uint8_t* int_vect_0_bit);
 
 //SCI_LIN_INT_VECT_1
 /**
@@ -1989,7 +1998,7 @@ uint8_t get_int_vect_0(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return The 5-bit interrupt vector offset (0x00 - 0x1F).
  */
-uint8_t get_int_vect_1(volatile tms570_reg* sci_lin_reg);
+bool sci_get_int_vect_1(volatile tms570_reg* sci_lin_reg, uint8_t* int_vect_1_bit);
 
 /**
  * @brief Set the character length (SCIFORMAT[2:0]) for SCI/LIN.
@@ -1998,7 +2007,7 @@ uint8_t get_int_vect_1(volatile tms570_reg* sci_lin_reg);
  * @param charLength Character length (1-8). Value of 1 sets 1 bit, 8 sets 8 bits, etc.
  *                   Only the lower 3 bits are used.
  */
-void set_char_length(volatile tms570_reg* sci_lin_reg, uint8_t charLength);
+bool sci_set_char_length(volatile tms570_reg* sci_lin_reg, uint8_t charLength);
 
 /**
  * @brief Get the character length (SCIFORMAT[2:0]) for SCI/LIN.
@@ -2006,7 +2015,7 @@ void set_char_length(volatile tms570_reg* sci_lin_reg, uint8_t charLength);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return Character length (1-8). Value of 1 means 1 bit, 8 means 8 bits, etc.
  */
-uint8_t get_char_length(volatile tms570_reg* sci_lin_reg);
+bool sci_get_char_length(volatile tms570_reg* sci_lin_reg, uint8_t* char_length_bit);
 
 /**
  * @brief Set the frame length (SCIFORMAT[18:16]) for SCI/LIN.
@@ -2018,7 +2027,7 @@ uint8_t get_char_length(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param frameLength Frame/response length (1-8). Value of 1 sets 1 byte/character, 8 sets 8 bytes/characters, etc.
  */
-void set_frame_length(volatile tms570_reg* sci_lin_reg, uint8_t frameLength);
+bool sci_set_frame_length(volatile tms570_reg* sci_lin_reg, uint8_t frameLength);
 
 /**
  * @brief Get the frame length (SCIFORMAT[18:16]) for SCI/LIN.
@@ -2026,7 +2035,7 @@ void set_frame_length(volatile tms570_reg* sci_lin_reg, uint8_t frameLength);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return Frame/response length (1-8). Value of 1 means 1 byte/character, 8 means 8 bytes/characters, etc.
  */
-uint8_t get_frame_length(volatile tms570_reg* sci_lin_reg);
+bool sci_get_frame_length(volatile tms570_reg* sci_lin_reg, uint8_t* frame_length_bit);
 
 //SCI_LIN_BRS
 
@@ -2041,7 +2050,7 @@ uint8_t get_frame_length(volatile tms570_reg* sci_lin_reg);
  * @param m 4-bit fractional divider value (M), valid range: 0x0 - 0xF
  * @param u 3-bit super fractional divider value (U), valid range: 0x0 - 0x7
  */
-void set_baud_rate_selection(volatile tms570_reg* sci_lin_reg, uint32_t prescaler, uint8_t m, uint8_t u);
+bool sci_set_baud_rate_selection(volatile tms570_reg* sci_lin_reg, uint32_t prescaler, uint8_t m, uint8_t u);
 
 /**
  * @brief Get the baud rate selection register (BRS) for SCI/LIN.
@@ -2051,7 +2060,7 @@ void set_baud_rate_selection(volatile tms570_reg* sci_lin_reg, uint32_t prescale
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void get_baud_rate_selection(volatile tms570_reg* sci_lin_reg);
+bool sci_get_baud_rate_selection(volatile tms570_reg* sci_lin_reg, uint32_t* brs_bit);
 
 //SCI_LIN_ED
 /**
@@ -2064,7 +2073,7 @@ void get_baud_rate_selection(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 8-bit emulator data (ED) from SCIED[7:0].
  */
-uint8_t read_emulator_data(volatile tms570_reg* sci_lin_reg);
+bool sci_get_emulator_data(volatile tms570_reg* sci_lin_reg, uint8_t* ed_bit);
 
 //SCI_LIN_RD
 /**
@@ -2077,7 +2086,7 @@ uint8_t read_emulator_data(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 8-bit receiver data (RD) from SCIRD[7:0].
  */
-uint8_t read_receiver_data(volatile tms570_reg* sci_lin_reg);
+bool sci_get_receiver_data(volatile tms570_reg* sci_lin_reg, uint8_t* rd_bit);
 
 /**
  * @brief Write to the Transmit Data Buffer Register (SCITD) for SCI/LIN.
@@ -2093,7 +2102,7 @@ uint8_t read_receiver_data(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param data 8-bit data to transmit (right justified).
  */
-void write_transmit_data(volatile tms570_reg* sci_lin_reg, uint8_t data);
+bool sci_write_transmit_data(volatile tms570_reg* sci_lin_reg, uint8_t data);
 
 //SCI_LIN_PIO0
 
@@ -2106,7 +2115,7 @@ void write_transmit_data(volatile tms570_reg* sci_lin_reg, uint8_t data);
  * @param tx_func 0 = LINTX is general-purpose I/O, 1 = LINTX is SCI/LIN transmit pin.
  * @param rx_func 0 = LINRX is general-purpose I/O, 1 = LINRX is SCI/LIN receive pin.
  */
-void set_sci_pio0_functions(volatile tms570_reg* sci_lin_reg, uint8_t tx_func, uint8_t rx_func);
+bool sci_set_pio0_functions(volatile tms570_reg* sci_lin_reg, uint8_t tx_func, uint8_t rx_func);
 
 
 /**
@@ -2116,7 +2125,7 @@ void set_sci_pio0_functions(volatile tms570_reg* sci_lin_reg, uint8_t tx_func, u
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void get_sci_pio0_functions(volatile tms570_reg* sci_lin_reg);
+bool sci_get_pio0_functions(volatile tms570_reg* sci_lin_reg, uint8_t* tx_func_bit, uint8_t* rx_func_bit);
 
 //SCI_LIN_PIO1
 
@@ -2133,7 +2142,7 @@ void get_sci_pio0_functions(volatile tms570_reg* sci_lin_reg);
  * @param tx_dir 0 = LINTX is input, 1 = LINTX is output
  * @param rx_dir 0 = LINRX is input, 1 = LINRX is output
  */
-void set_sci_pio1_directions(volatile tms570_reg* sci_lin_reg, uint8_t tx_dir, uint8_t rx_dir);
+bool sci_set_pio1_directions(volatile tms570_reg* sci_lin_reg, uint8_t tx_dir, uint8_t rx_dir);
 
 
 /**
@@ -2145,7 +2154,7 @@ void set_sci_pio1_directions(volatile tms570_reg* sci_lin_reg, uint8_t tx_dir, u
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void get_sci_pio1_directions(volatile tms570_reg* sci_lin_reg);
+bool sci_get_pio1_directions(volatile tms570_reg* sci_lin_reg, uint8_t* tx_dir_bit, uint8_t* rx_dir_bit);
 
 //SCI_LIN_PIO2
 
@@ -2159,7 +2168,7 @@ void get_sci_pio1_directions(volatile tms570_reg* sci_lin_reg);
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void get_sci_pio2_inputs(volatile tms570_reg* sci_lin_reg);
+bool sci_get_pio2_inputs(volatile tms570_reg* sci_lin_reg, uint8_t* tx_in_bit, uint8_t* rx_in_bit);
 
 //SCI_LIN_PIO3
 
@@ -2176,7 +2185,7 @@ void get_sci_pio2_inputs(volatile tms570_reg* sci_lin_reg);
  * @param tx_out 0 = LINTX output is logic low, 1 = LINTX output is logic high
  * @param rx_out 0 = LINRX output is logic low, 1 = LINRX output is logic high
  */
-void set_sci_pio3_outputs(volatile tms570_reg* sci_lin_reg, uint8_t tx_out, uint8_t rx_out);
+bool sci_set_pio3_outputs(volatile tms570_reg* sci_lin_reg, uint8_t tx_out, uint8_t rx_out);
 
 /**
  * @brief Get the output logic levels for the LINTX and LINRX pins from the SCI Pin I/O Control Register 3 (SCIPIO3).
@@ -2187,7 +2196,7 @@ void set_sci_pio3_outputs(volatile tms570_reg* sci_lin_reg, uint8_t tx_out, uint
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void get_sci_pio3_outputs(volatile tms570_reg* sci_lin_reg);
+bool sci_get_pio3_outputs(volatile tms570_reg* sci_lin_reg, uint8_t* tx_out_bit, uint8_t* rx_out_bit);
 
 //SCI_LIN_PIO4
 
@@ -2204,7 +2213,7 @@ void get_sci_pio3_outputs(volatile tms570_reg* sci_lin_reg);
  * @param tx_set 0 = LINTX output is logic low, 1 = LINTX output is logic high
  * @param rx_set 0 = LINRX output is logic low, 1 = LINRX output is logic high
  */
-void set_sci_pio4_outputs(volatile tms570_reg* sci_lin_reg, uint8_t tx_set, uint8_t rx_set);
+bool sci_set_pio4_outputs(volatile tms570_reg* sci_lin_reg, uint8_t tx_set, uint8_t rx_set);
 
 /**
  * @brief Get the output logic levels for the LINTX and LINRX pins from the SCI Pin I/O Control Register 4 (SCIPIO4).
@@ -2215,7 +2224,7 @@ void set_sci_pio4_outputs(volatile tms570_reg* sci_lin_reg, uint8_t tx_set, uint
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void get_sci_pio4_outputs(volatile tms570_reg* sci_lin_reg);
+bool sci_get_pio4_outputs(volatile tms570_reg* sci_lin_reg, uint8_t* tx_set_bit, uint8_t* rx_set_bit);
 
 //SCI_LIN_PIO5
 
@@ -2232,7 +2241,7 @@ void get_sci_pio4_outputs(volatile tms570_reg* sci_lin_reg);
  * @param tx_clr 1 = Clear LINTX output to logic low, 0 = No effect
  * @param rx_clr 1 = Clear LINRX output to logic low, 0 = No effect
  */
-void set_sci_pio5_outputs(volatile tms570_reg* sci_lin_reg, uint8_t tx_clr, uint8_t rx_clr);
+bool sci_set_pio5_outputs(volatile tms570_reg* sci_lin_reg, uint8_t tx_clr, uint8_t rx_clr);
 
 /**
  * @brief Get the output logic levels for the LINTX and LINRX pins from the SCI Pin I/O Control Register 5 (SCIPIO5).
@@ -2243,7 +2252,7 @@ void set_sci_pio5_outputs(volatile tms570_reg* sci_lin_reg, uint8_t tx_clr, uint
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void get_sci_pio5_outputs(volatile tms570_reg* sci_lin_reg);
+bool sci_get_pio5_outputs(volatile tms570_reg* sci_lin_reg, uint8_t* tx_clr_bit, uint8_t* rx_clr_bit);
 
 //SCI_LIN_PIO6
 
@@ -2257,7 +2266,7 @@ void get_sci_pio5_outputs(volatile tms570_reg* sci_lin_reg);
  * @param tx_pdr 1 = Enable open-drain for LINTX, 0 = Disable open-drain
  * @param rx_pdr 1 = Enable open-drain for LINRX, 0 = Disable open-drain
  */
-void set_sci_pio6_open_drain(volatile tms570_reg* sci_lin_reg, uint8_t tx_pdr, uint8_t rx_pdr);
+bool sci_set_pio6_open_drain(volatile tms570_reg* sci_lin_reg, uint8_t tx_pdr, uint8_t rx_pdr);
 
 /**
  * @brief Get the open-drain enable status for the LINTX and LINRX pins from the SCI Pin I/O Control Register 6 (SCIPIO6).
@@ -2267,7 +2276,7 @@ void set_sci_pio6_open_drain(volatile tms570_reg* sci_lin_reg, uint8_t tx_pdr, u
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return uint8_t Bitfield: bit 2 = TX PDR, bit 1 = RX PDR
  */
-uint8_t get_sci_pio6_open_drain(volatile tms570_reg* sci_lin_reg);
+bool sci_get_pio6_open_drain(volatile tms570_reg* sci_lin_reg, uint8_t* tx_pdr_bit, uint8_t* rx_pdr_bit);
 
 //SCI_LIN_PIO7
 
@@ -2281,7 +2290,7 @@ uint8_t get_sci_pio6_open_drain(volatile tms570_reg* sci_lin_reg);
  * @param tx_pd 1 = Disable pull control for LINTX, 0 = Enable pull control
  * @param rx_pd 1 = Disable pull control for LINRX, 0 = Enable pull control
  */
-void set_sci_pio7_pull_disable(volatile tms570_reg* sci_lin_reg, uint8_t tx_pd, uint8_t rx_pd);
+bool sci_set_pio7_pull_disable(volatile tms570_reg* sci_lin_reg, uint8_t tx_pd, uint8_t rx_pd);
 
 /**
  * @brief Get the pull control disable status for the LINTX and LINRX pins from the SCI Pin I/O Control Register 7 (SCIPIO7).
@@ -2291,7 +2300,7 @@ void set_sci_pio7_pull_disable(volatile tms570_reg* sci_lin_reg, uint8_t tx_pd, 
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return uint8_t Bitfield: bit 2 = TX PD, bit 1 = RX PD
  */
-uint8_t get_sci_pio7_pull_disable(volatile tms570_reg* sci_lin_reg);
+bool sci_get_pio7_pull_disable(volatile tms570_reg* sci_lin_reg, uint8_t* tx_pd_bit, uint8_t* rx_pd_bit);
 
 //SCI_LIN_PIO8
 
@@ -2305,7 +2314,7 @@ uint8_t get_sci_pio7_pull_disable(volatile tms570_reg* sci_lin_reg);
  * @param tx_psl 0 = Pull-down for LINTX, 1 = Pull-up for LINTX
  * @param rx_psl 0 = Pull-down for LINRX, 1 = Pull-up for LINRX
  */
-void set_sci_pio8_pull_select(volatile tms570_reg* sci_lin_reg, uint8_t tx_psl, uint8_t rx_psl);
+bool sci_set_pio8_pull_select(volatile tms570_reg* sci_lin_reg, uint8_t tx_psl, uint8_t rx_psl);
 
 /**
  * @brief Get the pull select (pull-up or pull-down) status for the LINTX and LINRX pins from the SCI Pin I/O Control Register 8 (SCIPIO8).
@@ -2315,7 +2324,7 @@ void set_sci_pio8_pull_select(volatile tms570_reg* sci_lin_reg, uint8_t tx_psl, 
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return uint8_t Bitfield: bit 2 = TX PSL, bit 1 = RX PSL
  */
-uint8_t get_sci_pio8_pull_select(volatile tms570_reg* sci_lin_reg);
+bool sci_get_pio8_pull_select(volatile tms570_reg* sci_lin_reg, uint8_t* tx_psl_bit, uint8_t* rx_psl_bit);
 
 //SCI_LIN_COMPARE
 
@@ -2334,7 +2343,7 @@ uint8_t get_sci_pio8_pull_select(volatile tms570_reg* sci_lin_reg);
  * @param sdel Value for SDEL field (0-3).
  * @param sbreak Value for SBREAK field (0-7).
  */
-void set_lin_compare(volatile tms570_reg* sci_lin_reg, uint8_t sdel, uint8_t sbreak);
+bool sci_set_lin_compare(volatile tms570_reg* sci_lin_reg, uint8_t sdel, uint8_t sbreak);
 
 /**
  * @brief Get the SDEL and SBREAK fields from the LIN Compare Register (LINCOMPARE).
@@ -2343,7 +2352,7 @@ void set_lin_compare(volatile tms570_reg* sci_lin_reg, uint8_t sdel, uint8_t sbr
  *
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  */
-void get_lin_compare(volatile tms570_reg* sci_lin_reg);
+bool sci_get_lin_compare(volatile tms570_reg* sci_lin_reg, uint8_t* sdel_bit, uint8_t* sbreak_bit);
 
 //SCI_LIN_RD0
 
@@ -2362,7 +2371,7 @@ void get_lin_compare(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return uint32_t 32-bit value containing RD0 (bits 31-24), RD1 (23-16), RD2 (15-8), RD3 (7-0)
  */
-uint32_t read_lin_receive_buffer0(volatile tms570_reg* sci_lin_reg);
+bool sci_read_lin_receive_buffer0(volatile tms570_reg* sci_lin_reg, uint32_t* lin_rd0_bit);
 
 /**
  * @brief Read a specific byte from the LIN Receive Buffer 0 Register (LINRD0).
@@ -2374,7 +2383,7 @@ uint32_t read_lin_receive_buffer0(volatile tms570_reg* sci_lin_reg);
  * @param byte_index Index of the byte to read (0 = RD0, 1 = RD1, 2 = RD2, 3 = RD3)
  * @return uint8_t Value of the requested data byte, or 0 if index is out of range.
  */
-uint8_t read_lin_receive_buffer0_byte(volatile tms570_reg* sci_lin_reg, uint8_t byte_index);
+bool sci_read_lin_receive_buffer0_byte(volatile tms570_reg* sci_lin_reg, uint8_t byte_index, uint8_t* byte_value);
 
 //SCI_LIN_RD1
 
@@ -2393,7 +2402,7 @@ uint8_t read_lin_receive_buffer0_byte(volatile tms570_reg* sci_lin_reg, uint8_t 
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return uint32_t 32-bit value containing RD4 (bits 31-24), RD5 (23-16), RD6 (15-8), RD7 (7-0)
  */
-uint32_t read_lin_receive_buffer1(volatile tms570_reg* sci_lin_reg);
+bool sci_read_lin_receive_buffer1(volatile tms570_reg* sci_lin_reg, uint32_t* lin_rd1_bit);
 
 /**
  * @brief Read a specific byte from the LIN Receive Buffer 1 Register (LINRD1).
@@ -2405,7 +2414,7 @@ uint32_t read_lin_receive_buffer1(volatile tms570_reg* sci_lin_reg);
  * @param byte_index Index of the byte to read (4 = RD4, 5 = RD5, 6 = RD6, 7 = RD7)
  * @return uint8_t Value of the requested data byte, or 0 if index is out of range.
  */
-uint8_t read_lin_receive_buffer1_byte(volatile tms570_reg* sci_lin_reg, uint8_t byte_index);
+bool sci_read_lin_receive_buffer1_byte(volatile tms570_reg* sci_lin_reg, uint8_t byte_index, uint8_t* byte_value);
 
 //SCI_LIN_MASK
 
@@ -2418,7 +2427,7 @@ uint8_t read_lin_receive_buffer1_byte(volatile tms570_reg* sci_lin_reg, uint8_t 
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return uint32_t 32-bit value of the LINMASK register.
  */
-uint32_t read_lin_mask(volatile tms570_reg* sci_lin_reg);
+bool sci_read_lin_mask(volatile tms570_reg* sci_lin_reg, uint32_t* lin_mask_bit);
 
 /**
  * @brief Write to the LIN Mask Register (LINMASK).
@@ -2430,7 +2439,7 @@ uint32_t read_lin_mask(volatile tms570_reg* sci_lin_reg);
  * @param rx_id_mask 8-bit RX ID mask (bits 23-16).
  * @param tx_id_mask 8-bit TX ID mask (bits 7-0).
  */
-void write_lin_mask(volatile tms570_reg* sci_lin_reg, uint8_t rx_id_mask, uint8_t tx_id_mask);
+bool sci_write_lin_mask(volatile tms570_reg* sci_lin_reg, uint8_t rx_id_mask, uint8_t tx_id_mask);
 
 /**
  * @brief Get the RX ID MASK field from the LIN Mask Register (LINMASK).
@@ -2438,7 +2447,7 @@ void write_lin_mask(volatile tms570_reg* sci_lin_reg, uint8_t rx_id_mask, uint8_
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return uint8_t RX ID MASK (bits 23-16).
  */
-uint8_t get_lin_rx_id_mask(volatile tms570_reg* sci_lin_reg);
+bool sci_get_lin_rx_id_mask(volatile tms570_reg* sci_lin_reg, uint8_t* rx_id_mask_bit);
 
 /**
  * @brief Get the TX ID MASK field from the LIN Mask Register (LINMASK).
@@ -2446,7 +2455,7 @@ uint8_t get_lin_rx_id_mask(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return uint8_t TX ID MASK (bits 7-0).
  */
-uint8_t get_lin_tx_id_mask(volatile tms570_reg* sci_lin_reg);
+bool sci_get_lin_tx_id_mask(volatile tms570_reg* sci_lin_reg, uint8_t* tx_id_mask_bit);
 
 /**
  * @brief Set the RX ID MASK field in the LIN Mask Register (LINMASK).
@@ -2456,7 +2465,7 @@ uint8_t get_lin_tx_id_mask(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param rx_id_mask 8-bit RX ID mask.
  */
-void set_lin_rx_id_mask(volatile tms570_reg* sci_lin_reg, uint8_t rx_id_mask);
+bool sci_set_lin_rx_id_mask(volatile tms570_reg* sci_lin_reg, uint8_t rx_id_mask);
 
 /**
  * @brief Set the TX ID MASK field in the LIN Mask Register (LINMASK).
@@ -2466,7 +2475,7 @@ void set_lin_rx_id_mask(volatile tms570_reg* sci_lin_reg, uint8_t rx_id_mask);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param tx_id_mask 8-bit TX ID mask.
  */
-void set_lin_tx_id_mask(volatile tms570_reg* sci_lin_reg, uint8_t tx_id_mask);
+bool sci_set_lin_tx_id_mask(volatile tms570_reg* sci_lin_reg, uint8_t tx_id_mask);
 
 //SCI_LIN_ID
 
@@ -2480,7 +2489,7 @@ void set_lin_tx_id_mask(volatile tms570_reg* sci_lin_reg, uint8_t tx_id_mask);
  * @param id_slave_task 8-bit value for the ID-SlaveTask Byte (bits 15-8).
  * @param id 8-bit value for the ID Byte (bits 7-0).
  */
-void write_lin_id(volatile tms570_reg* sci_lin_reg, uint8_t id_slave_task, uint8_t id);
+bool sci_write_lin_id(volatile tms570_reg* sci_lin_reg, uint8_t id_slave_task, uint8_t id);
 
 /**
  * @brief Get the RECEIVED ID field from the LIN Identification Register (LINID).
@@ -2490,7 +2499,7 @@ void write_lin_id(volatile tms570_reg* sci_lin_reg, uint8_t id_slave_task, uint8
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 8-bit RECEIVED ID.
  */
-uint8_t get_lin_received_id(volatile tms570_reg* sci_lin_reg);
+bool sci_get_lin_received_id(volatile tms570_reg* sci_lin_reg, uint8_t* received_id_bit);
 
 /**
  * @brief Get the ID-SlaveTask Byte from the LIN Identification Register (LINID).
@@ -2500,7 +2509,7 @@ uint8_t get_lin_received_id(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 8-bit ID-SlaveTask Byte.
  */
-uint8_t get_lin_id_slave_task(volatile tms570_reg* sci_lin_reg);
+bool sci_get_lin_id_slave_task(volatile tms570_reg* sci_lin_reg, uint8_t* id_slave_task_bit);
 
 /**
  * @brief Get the ID Byte from the LIN Identification Register (LINID).
@@ -2510,7 +2519,7 @@ uint8_t get_lin_id_slave_task(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 8-bit ID Byte.
  */
-uint8_t get_lin_id(volatile tms570_reg* sci_lin_reg);
+bool sci_get_lin_id(volatile tms570_reg* sci_lin_reg, uint8_t* id_bit);
 
 /**
  * @brief Set the ID-SlaveTask Byte in the LIN Identification Register (LINID).
@@ -2521,7 +2530,7 @@ uint8_t get_lin_id(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param id_slave_task 8-bit value for the ID-SlaveTask Byte.
  */
-void set_lin_id_slave_task(volatile tms570_reg* sci_lin_reg, uint8_t id_slave_task);
+bool sci_set_lin_id_slave_task(volatile tms570_reg* sci_lin_reg, uint8_t id_slave_task);
 
 /**
  * @brief Set the ID Byte in the LIN Identification Register (LINID).
@@ -2532,7 +2541,7 @@ void set_lin_id_slave_task(volatile tms570_reg* sci_lin_reg, uint8_t id_slave_ta
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param id 8-bit value for the ID Byte.
  */
-void set_lin_id(volatile tms570_reg* sci_lin_reg, uint8_t id);
+bool sci_set_lin_id(volatile tms570_reg* sci_lin_reg, uint8_t id);
 
 //SCI_LIN_TD0
 
@@ -2551,7 +2560,7 @@ void set_lin_id(volatile tms570_reg* sci_lin_reg, uint8_t id);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param value 32-bit value containing TD0 (bits 31-24), TD1 (23-16), TD2 (15-8), TD3 (7-0)
  */
-void write_lin_transmit_buffer0(volatile tms570_reg* sci_lin_reg, uint32_t value);
+bool sci_write_lin_transmit_buffer0(volatile tms570_reg* sci_lin_reg, uint32_t value);
 
 /**
  * @brief Write a specific byte to the LIN Transmit Buffer 0 Register (LINTD0).
@@ -2563,7 +2572,7 @@ void write_lin_transmit_buffer0(volatile tms570_reg* sci_lin_reg, uint32_t value
  * @param byte_index Index of the byte to write (0 = TD0, 1 = TD1, 2 = TD2, 3 = TD3)
  * @param data 8-bit value to write to the specified byte.
  */
-void write_lin_transmit_buffer0_byte(volatile tms570_reg* sci_lin_reg, uint8_t byte_index, uint8_t data);
+bool sci_write_lin_transmit_buffer0_byte(volatile tms570_reg* sci_lin_reg, uint8_t byte_index, uint8_t data);
 
 //SCI_LIN_TD1
 
@@ -2581,7 +2590,7 @@ void write_lin_transmit_buffer0_byte(volatile tms570_reg* sci_lin_reg, uint8_t b
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param value 32-bit value containing TD4 (bits 31-24), TD5 (23-16), TD6 (15-8), TD7 (7-0)
  */
-void write_lin_transmit_buffer1(volatile tms570_reg* sci_lin_reg, uint32_t value);
+bool sci_write_lin_transmit_buffer1(volatile tms570_reg* sci_lin_reg, uint32_t value);
 
 /**
  * @brief Write a specific byte to the LIN Transmit Buffer 1 Register (LINTD1).
@@ -2592,7 +2601,7 @@ void write_lin_transmit_buffer1(volatile tms570_reg* sci_lin_reg, uint32_t value
  * @param byte_index Index of the byte to write (4 = TD4, 5 = TD5, 6 = TD6, 7 = TD7)
  * @param data 8-bit value to write to the specified byte.
  */
-void write_lin_transmit_buffer1_byte(volatile tms570_reg* sci_lin_reg, uint8_t byte_index, uint8_t data);
+bool sci_write_lin_transmit_buffer1_byte(volatile tms570_reg* sci_lin_reg, uint8_t byte_index, uint8_t data);
 
 //SCI_LIN_MBRS
 
@@ -2605,7 +2614,7 @@ void write_lin_transmit_buffer1_byte(volatile tms570_reg* sci_lin_reg, uint8_t b
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param mbr 13-bit value for the Maximum Baud Rate prescaler (0-0x1FFF).
  */
-void set_lin_max_baud_rate(volatile tms570_reg* sci_lin_reg, uint16_t mbr);
+bool sci_set_lin_max_baud_rate(volatile tms570_reg* sci_lin_reg, uint16_t mbr);
 
 /**
  * @brief Get the Maximum Baud Rate (MBR) field from the Maximum Baud Rate Selection Register (MBRS).
@@ -2615,7 +2624,7 @@ void set_lin_max_baud_rate(volatile tms570_reg* sci_lin_reg, uint16_t mbr);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 13-bit value of the Maximum Baud Rate prescaler (0-0x1FFF).
  */
-uint16_t get_lin_max_baud_rate(volatile tms570_reg* sci_lin_reg);
+bool sci_get_lin_max_baud_rate(volatile tms570_reg* sci_lin_reg, uint16_t* mbr_bit);
 
 //SCI_LIN_IODFTCTRL
 
@@ -2629,7 +2638,7 @@ uint16_t get_lin_max_baud_rate(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param rxp_ena 0 = Analog loopback through transmit pin, 1 = Analog loopback through receive pin.
  */
-void set_sci_iodftctrl_rxp_ena(volatile tms570_reg* sci_lin_reg, uint8_t rxp_ena);
+bool sci_set_iodftctrl_rxp_ena(volatile tms570_reg* sci_lin_reg, uint8_t rxp_ena);
 
 /**
  * @brief Get the RXP ENA bit from the IODFTCTRL register.
@@ -2640,7 +2649,7 @@ void set_sci_iodftctrl_rxp_ena(volatile tms570_reg* sci_lin_reg, uint8_t rxp_ena
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 0 = Analog loopback through transmit pin, 1 = Analog loopback through receive pin.
  */
-uint8_t get_sci_iodftctrl_rxp_ena(volatile tms570_reg* sci_lin_reg);
+bool sci_get_iodftctrl_rxp_ena(volatile tms570_reg* sci_lin_reg, uint8_t* rxp_ena_bit);
 
 
 /**
@@ -2656,7 +2665,7 @@ uint8_t get_sci_iodftctrl_rxp_ena(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param lpb_ena 0 = Digital loopback, 1 = Analog loopback (in IODFTENA = 1010 mode).
  */
-void set_sci_iodftctrl_lpb_ena(volatile tms570_reg* sci_lin_reg, uint8_t lpb_ena);
+bool sci_set_iodftctrl_lpb_ena(volatile tms570_reg* sci_lin_reg, uint8_t lpb_ena);
 
 /**
  * @brief Get the LPB ENA (Loopback Enable) bit from the IODFTCTRL register.
@@ -2667,7 +2676,7 @@ void set_sci_iodftctrl_lpb_ena(volatile tms570_reg* sci_lin_reg, uint8_t lpb_ena
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 0 = Digital loopback enabled, 1 = Analog loopback enabled (in IODFTENA = 1010 mode).
  */
-uint8_t get_sci_iodftctrl_lpb_ena(volatile tms570_reg* sci_lin_reg);
+bool sci_get_iodftctrl_lpb_ena(volatile tms570_reg* sci_lin_reg, uint8_t* lpb_ena_bit);
 
 /**
  * @brief Set the IODFTENA field (bits 11:8) in the IODFTCTRL register.
@@ -2679,7 +2688,7 @@ uint8_t get_sci_iodftctrl_lpb_ena(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param iodftena 4-bit value to write to IODFTENA (bits 11:8). 0xA enables IODFT, others disable.
  */
-void set_sci_iodftctrl_iodftena(volatile tms570_reg* sci_lin_reg, uint8_t iodftena);
+bool sci_set_iodftctrl_iodftena(volatile tms570_reg* sci_lin_reg, uint8_t iodftena);
 
 /**
  * @brief Get the IODFTENA field (bits 11:8) from the IODFTCTRL register.
@@ -2690,7 +2699,7 @@ void set_sci_iodftctrl_iodftena(volatile tms570_reg* sci_lin_reg, uint8_t iodfte
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 4-bit value of IODFTENA (bits 11:8). 0xA means IODFT is enabled, others mean disabled.
  */
-uint8_t get_sci_iodftctrl_iodftena(volatile tms570_reg* sci_lin_reg);
+bool sci_get_iodftctrl_iodftena(volatile tms570_reg* sci_lin_reg, uint8_t* iodftena_bit);
 
 /**
  * @brief Set the TX SHIFT field (bits 18:16) in the SCI/LIN register.
@@ -2709,7 +2718,7 @@ uint8_t get_sci_iodftctrl_iodftena(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param tx_shift Value to set for TX SHIFT (0-7).
  */
-void set_sci_tx_shift(volatile tms570_reg* sci_lin_reg, uint8_t tx_shift);
+bool sci_set_tx_shift(volatile tms570_reg* sci_lin_reg, uint8_t tx_shift);
 
 /**
  * @brief Get the TX SHIFT field (bits 18:16) from the SCI/LIN register.
@@ -2719,7 +2728,7 @@ void set_sci_tx_shift(volatile tms570_reg* sci_lin_reg, uint8_t tx_shift);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return Value of TX SHIFT (0-7).
  */
-uint8_t get_sci_tx_shift(volatile tms570_reg* sci_lin_reg);
+bool sci_get_tx_shift(volatile tms570_reg* sci_lin_reg, uint8_t* tx_shift_bit);
 
 /**
  * @brief Set the PIN SAMPLE MASK field (bits 20:19) in the SCI/LIN register.
@@ -2735,7 +2744,7 @@ uint8_t get_sci_tx_shift(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param pin_sample_mask Value to set for PIN SAMPLE MASK (0-3).
  */
-void set_sci_pin_sample_mask(volatile tms570_reg* sci_lin_reg, uint8_t pin_sample_mask);
+bool sci_set_pin_sample_mask(volatile tms570_reg* sci_lin_reg, uint8_t pin_sample_mask);
 
 /**
  * @brief Get the PIN SAMPLE MASK field (bits 20:19) from the SCI/LIN register.
@@ -2746,7 +2755,7 @@ void set_sci_pin_sample_mask(volatile tms570_reg* sci_lin_reg, uint8_t pin_sampl
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return Value of PIN SAMPLE MASK (0-3).
  */
-uint8_t get_sci_pin_sample_mask(volatile tms570_reg* sci_lin_reg);
+bool sci_get_pin_sample_mask(volatile tms570_reg* sci_lin_reg, uint8_t* pin_sample_mask_bit);
 
 /**
  * @brief Enable or disable Break Detect Error (BRKDT ENA) in the SCI/LIN module.
@@ -2759,7 +2768,7 @@ uint8_t get_sci_pin_sample_mask(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param enable 0 = No error is created, 1 = Force BRKDT error as described.
  */
-void set_sci_brkdt_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
+bool sci_set_brkdt_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
 
 /**
  * @brief Get the current state of the Break Detect Error Enable (BRKDT ENA) bit.
@@ -2769,7 +2778,7 @@ void set_sci_brkdt_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 0 if BRKDT error is not enabled, 1 if enabled.
  */
-uint8_t get_sci_brkdt_enable(volatile tms570_reg* sci_lin_reg);
+bool sci_get_brkdt_enable(volatile tms570_reg* sci_lin_reg, uint8_t* brkdt_enable_bit);
 
 /**
  * @brief Enable or disable Parity Error (PEN) in the SCI/LIN module.
@@ -2781,7 +2790,7 @@ uint8_t get_sci_brkdt_enable(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param enable 0 = No parity error occurs, 1 = Force parity error as described.
  */
-void set_sci_parity_error_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
+bool sci_set_pen_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
 
 /**
  * @brief Get the current state of the Parity Error Enable (PEN) bit.
@@ -2791,7 +2800,7 @@ void set_sci_parity_error_enable(volatile tms570_reg* sci_lin_reg, uint8_t enabl
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 0 if parity error is not enabled, 1 if enabled.
  */
-uint8_t get_sci_parity_error_enable(volatile tms570_reg* sci_lin_reg);
+bool sci_get_pen_enable(volatile tms570_reg* sci_lin_reg, uint8_t* pen_enable_bit);
 
 
 /**
@@ -2804,7 +2813,7 @@ uint8_t get_sci_parity_error_enable(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param enable 0 = No error is created, 1 = Force frame error as described.
  */
-void set_sci_frame_error_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
+bool sci_set_fen_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
 
 /**
  * @brief Get the current state of the Frame Error Enable (FEN) bit.
@@ -2814,7 +2823,7 @@ void set_sci_frame_error_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 0 if frame error is not enabled, 1 if enabled.
  */
-uint8_t get_sci_frame_error_enable(volatile tms570_reg* sci_lin_reg);
+bool sci_get_fen_enable(volatile tms570_reg* sci_lin_reg, uint8_t* fen_enable_bit);
 
 /**
  * @brief Enable or disable Inconsistent Synch Field Error (ISFE) in the SCI/LIN module.
@@ -2826,7 +2835,7 @@ uint8_t get_sci_frame_error_enable(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param enable 0 = No error is created, 1 = Force ISF error as described.
  */
-void set_sci_isfe_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
+bool sci_set_isfe_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
 
 /**
  * @brief Get the current state of the Inconsistent Synch Field Error Enable (ISFE) bit.
@@ -2836,7 +2845,7 @@ void set_sci_isfe_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 0 if ISF error is not enabled, 1 if enabled.
  */
-uint8_t get_sci_isfe_enable(volatile tms570_reg* sci_lin_reg);
+bool sci_get_isfe_enable(volatile tms570_reg* sci_lin_reg, uint8_t* isfe_enable_bit);
 
 
 /**
@@ -2850,7 +2859,7 @@ uint8_t get_sci_isfe_enable(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param enable 0 = No error is created, 1 = Force checksum error as described.
  */
-void set_sci_checksum_error_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
+bool sci_set_cen_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
 
 /**
  * @brief Get the current state of the Checksum Error Enable (CEN) bit.
@@ -2860,7 +2869,7 @@ void set_sci_checksum_error_enable(volatile tms570_reg* sci_lin_reg, uint8_t ena
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 0 if checksum error is not enabled, 1 if enabled.
  */
-uint8_t get_sci_checksum_error_enable(volatile tms570_reg* sci_lin_reg);
+bool sci_get_cen_enable(volatile tms570_reg* sci_lin_reg, uint8_t* cen_enable_bit);
 
 
 /**
@@ -2874,7 +2883,7 @@ uint8_t get_sci_checksum_error_enable(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param enable 0 = No error is created, 1 = Force physical bus error as described.
  */
-void set_sci_physical_bus_error_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
+bool sci_set_pb_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
 
 /**
  * @brief Get the current state of the Physical Bus Error Enable (PBEN) bit.
@@ -2884,7 +2893,7 @@ void set_sci_physical_bus_error_enable(volatile tms570_reg* sci_lin_reg, uint8_t
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 0 if physical bus error is not enabled, 1 if enabled.
  */
-uint8_t get_sci_physical_bus_error_enable(volatile tms570_reg* sci_lin_reg);
+bool sci_get_pb_enable(volatile tms570_reg* sci_lin_reg, uint8_t* pb_enable_bit);
 
 /**
  * @brief Enable or disable Bit Error (BEN) in the SCI/LIN module.
@@ -2897,7 +2906,7 @@ uint8_t get_sci_physical_bus_error_enable(volatile tms570_reg* sci_lin_reg);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @param enable 0 = No bit error is created, 1 = Force bit error as described.
  */
-void set_sci_bit_error_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
+bool sci_set_ben_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
 
 /**
  * @brief Get the current state of the Bit Error Enable (BEN) bit.
@@ -2907,6 +2916,6 @@ void set_sci_bit_error_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
  * @param sci_lin_reg Pointer to the SCI/LIN register base.
  * @return 0 if bit error is not enabled, 1 if enabled.
  */
-uint8_t get_sci_bit_error_enable(volatile tms570_reg* sci_lin_reg);
+bool sci_get_ben_enable(volatile tms570_reg* sci_lin_reg, uint8_t* ben_enable_bit);
 
 #endif // SCI_LIN_UTILS_H
