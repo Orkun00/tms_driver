@@ -2918,4 +2918,40 @@ bool sci_set_ben_enable(volatile tms570_reg* sci_lin_reg, uint8_t enable);
  */
 bool sci_get_ben_enable(volatile tms570_reg* sci_lin_reg, uint8_t* ben_enable_bit);
 
+bool disable_all_interrupts(volatile tms570_reg* sci_lin_reg);
+
+bool sci_set_rx_ena(volatile tms570_reg* sci_lin_reg, uint8_t rx_ena);
+
+bool sci_reset(volatile tms570_reg* sci_lin_reg, bool reset);
+bool disable_all_interrupts(volatile tms570_reg* sci_lin_reg);
+bool gcr1_global_control_1(volatile tms570_reg* sci_lin_reg, bool tx_ena, bool rx_ena, bool clock, bool stop, bool parity, bool parity_ena, bool timing_mode);
+bool set_baud_rate(volatile tms570_reg* sci_lin_reg, uint32_t prescaler, uint16_t m, uint32_t* baudrate);
+bool set_format(volatile tms570_reg* sci_lin_reg, uint8_t length);
+bool set_pio0(volatile tms570_reg* sci_lin_reg, uint8_t tx_func, uint8_t rx_func);
+bool set_pio3(volatile tms570_reg* sci_lin_reg, uint8_t tx_func, uint8_t rx_func);
+bool set_pio1(volatile tms570_reg* sci_lin_reg, uint8_t tx_func, uint8_t rx_func);
+bool set_pio6(volatile tms570_reg* sci_lin_reg, uint8_t tx_func, uint8_t rx_func);
+bool set_pio7(volatile tms570_reg* sci_lin_reg, uint8_t tx_func, uint8_t rx_func);
+bool set_pio8(volatile tms570_reg* sci_lin_reg, uint8_t tx_func, uint8_t rx_func);
+bool set_int_level(volatile tms570_reg* sci_lin_reg, uint8_t framing_error, uint8_t overrun_error, uint8_t parity_error, uint8_t receive, uint8_t transmit, uint8_t wakeup, uint8_t break_detect);
+bool set_int_enable(volatile tms570_reg* sci_lin_reg, uint8_t framing_error, uint8_t overrun_error, uint8_t parity_error, uint8_t receive, uint8_t wakeup, uint8_t break_detect);
+bool initialize_global_transfer_variables(uint8_t sci_num);
+bool start_sci(uint8_t sci_num);
+bool stop_sci(uint8_t sci_num);
+bool sciSetFunctional(volatile tms570_reg* sci_lin_reg, uint32_t port);
+bool sciSetBaudrate(volatile tms570_reg* sci_lin_reg, uint32_t baud);
+bool sciIsTxReady(volatile tms570_reg* sci_lin_reg);
+bool sciSendByte(volatile tms570_reg* sci_lin_reg, uint8_t byte);
+bool sciSend(volatile tms570_reg* sci_lin_reg, uint32_t length, uint8_t* data);
+bool sciIsRxReady(volatile tms570_reg* sci_lin_reg);
+bool sciIsIdleDetected(volatile tms570_reg* sci_lin_reg);
+bool sciRxError(volatile tms570_reg* sci_lin_reg, uint32_t* error_flags);
+bool sciReceiveByte(volatile tms570_reg* sci_lin_reg);
+bool sciReceive(volatile tms570_reg* sci_lin_reg, uint32_t length, uint8_t* data);
+bool sciEnableLoopback(volatile tms570_reg* sci_lin_reg, bool loopbackMode);
+bool sciDisableLoopback(volatile tms570_reg* sci_lin_reg);
+bool sciEnableNotification(volatile tms570_reg* sci_lin_reg, uint32_t flags);
+bool sciDisableNotification(volatile tms570_reg* sci_lin_reg, uint32_t flags);
+bool sciEnterResetState(volatile tms570_reg* sci_lin_reg);
+bool sciExitResetState(volatile tms570_reg* sci_lin_reg);
 #endif // SCI_LIN_UTILS_H

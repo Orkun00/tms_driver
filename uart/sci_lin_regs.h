@@ -6,6 +6,7 @@
 /* Base addresses for SCI modules */
 #define TMS570_SCI_LIN_1_BASE_ADDR                ((tms570_reg*)0xFFF7E400)
 #define TMS570_SCI_LIN_2_BASE_ADDR                ((tms570_reg*)0xFFF7E600)
+#define TMS570_SCI_LIN_3_BASE_ADDR                ((tms570_reg*)0xFFF7E500)
 
 /* SCI Register Offsets */
 #define TMS570_SCI_GCR0                      (0x00 / sizeof(tms570_reg))  /* SCI Global Control Register 0 */
